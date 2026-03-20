@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Volt Electronics — Seu Setup Ideal</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --yellow: #F5D000;
+    --blue: #1E90FF;
+    --black: #0A0A0A;
+    --dark: #111111;
+    --gray: #1A1A1A;
+    --text: #FFFFFF;
+    --muted: rgba(255,255,255,0.45);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Barlow', sans-serif; background: var(--black); color: var(--text); overflow-x: hidden; }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--black); }
+  ::-webkit-scrollbar-thumb { background: var(--yellow); border-radius: 2px; }
+
+  /* NAVBAR */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 40px;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(245,208,0,0.15);
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 30px; letter-spacing: 3px; color: var(--yellow);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .nav-logo span { color: #fff; }
+  .nav-links { display: flex; align-items: center; gap: 32px; }
+  .nav-links a {
+    font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--muted); text-decoration: none; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--yellow); }
+  .btn {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px; letter-spacing: 2px;
+    padding: 10px 24px; border-radius: 2px;
+    cursor: pointer; text-decoration: none; border: none;
+    transition: transform 0.15s, background 0.2s;
+    display: inline-block;
+  }
+  .btn-primary { background: var(--yellow); color: var(--black); }
+  .btn-primary:hover { transform: scale(1.04); }
+  .btn-outline {
+    background: transparent; color: var(--yellow);
+    border: 1px solid var(--yellow);
+  }
+  .btn-outline:hover { background: rgba(245,208,0,0.08); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 100px 40px 60px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 75% 50%, rgba(245,208,0,0.06) 0%, transparent 55%),
+      radial-gradient(ellipse at 15% 80%, rgba(30,144,255,0.05) 0%, transparent 45%);
+    pointer-events: none;
+  }
+  .hero-left { position: relative; z-index: 1; }
+  .hero-tag {
+    display: inline-block;
+    background: var(--yellow); color: var(--black);
+    font-size: 11px; font-weight: 600; letter-spacing: 3px;
+    padding: 5px 14px; border-radius: 2px; margin-bottom: 24px;
+    text-transform: uppercase;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(60px, 8vw, 96px);
+    line-height: 0.95; color: #fff; margin-bottom: 12px;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+  .hero-title .accent { color: var(--yellow); }
+  .hero-title .blue { color: var(--blue); }
+  .hero-sub {
+    font-size: 16px; color: var(--muted); line-height: 1.7;
+    max-width: 400px; margin-bottom: 36px;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+  .hero-cta {
+    display: flex; gap: 16px; flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+  .hero-right {
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    animation: fadeIn 1s 0.4s ease both;
+  }
+  .hero-logo-wrap {
+    position: relative; width: 300px; height: 300px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .ring {
+    position: absolute; border-radius: 50%;
+    border: 1px solid rgba(245,208,0,0.15);
+    animation: spin 20s linear infinite;
+  }
+  .ring1 { inset: 0; }
+  .ring2 { inset: -24px; border-color: rgba(245,208,0,0.07); animation-duration: 30s; animation-direction: reverse; }
+  .ring3 { inset: -48px; border-color: rgba(30,144,255,0.05); animation-duration: 40s; }
+  .hero-glow {
+    position: absolute; inset: 20px;
+    background: radial-gradient(circle, rgba(245,208,0,0.12), transparent 70%);
+    border-radius: 50%;
+  }
+  .hero-icon {
+    font-size: 120px; position: relative; z-index: 1;
+    filter: drop-shadow(0 0 40px rgba(245,208,0,0.3));
+    animation: pulse 3s ease-in-out infinite;
+  }
+
+  /* STATS BAR */
+  .stats-bar {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid rgba(245,208,0,0.12);
+    border-bottom: 1px solid rgba(245,208,0,0.12);
+    background: var(--dark);
+  }
+  .stat {
+    padding: 24px; text-align: center;
+    border-right: 1px solid rgba(255,255,255,0.05);
+  }
+  .stat:last-child { border-right: none; }
+  .stat-n {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px; color: var(--yellow);
+  }
+  .stat-l {
+    font-size: 11px; color: var(--muted);
+    letter-spacing: 2px; text-transform: uppercase; margin-top: 4px;
+  }
+
+  /* SECTIONS */
+  .section { padding: 80px 40px; }
+  .section-header { margin-bottom: 48px; }
+  .section-tag {
+    font-size: 11px; color: var(--yellow);
+    letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 5vw, 52px); color: #fff; line-height: 1;
+  }
+  .section-title .accent { color: var(--yellow); }
+
+  /* PRODUTOS */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+  }
+  .product-card {
+    background: var(--dark);
+    border: 0.5px solid rgba(255,255,255,0.07);
+    border-radius: 4px; overflow: hidden;
+    transition: border-color 0.25s, transform 0.25s;
+    cursor: pointer;
+  }
+  .product-card:hover {
+    border-color: rgba(245,208,0,0.35);
+    transform: translateY(-4px);
+  }
+  .product-img {
+    height: 140px;
+    background: linear-gradient(135deg, #161616, #1e1e1e);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 52px;
+    position: relative; overflow: hidden;
+  }
+  .product-img::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 50% 120%, rgba(245,208,0,0.06), transparent 60%);
+  }
+  .product-badge {
+    position: absolute; top: 10px; right: 10px;
+    background: var(--yellow); color: var(--black);
+    font-size: 9px; font-weight: 600; letter-spacing: 1px;
+    padding: 3px 8px; border-radius: 2px;
+    text-transform: uppercase;
+  }
+  .product-info { padding: 18px; }
+  .product-cat {
+    font-size: 10px; color: var(--yellow);
+    letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px;
+  }
+  .product-name { font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 4px; }
+  .product-desc { font-size: 12px; color: var(--muted); line-height: 1.5; margin-bottom: 16px; }
+  .product-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-top: 14px; border-top: 0.5px solid rgba(255,255,255,0.06);
+  }
+  .product-price {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px; color: var(--yellow);
+  }
+  .product-price small {
+    font-size: 14px; color: var(--muted);
+    font-family: 'Barlow', sans-serif;
+    display: block; margin-bottom: -4px;
+  }
+  .btn-buy {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 14px; letter-spacing: 1px;
+    padding: 8px 18px; background: var(--yellow); color: var(--black);
+    border-radius: 2px; text-decoration: none; border: none; cursor: pointer;
+    transition: transform 0.15s, opacity 0.15s;
+  }
+  .btn-buy:hover { transform: scale(1.05); opacity: 0.9; }
+
+  /* BANNER CTA */
+  .cta-section {
+    margin: 0 40px 80px;
+    background: linear-gradient(135deg, #0f0f00 0%, #1a1500 40%, #000a14 100%);
+    border: 1px solid rgba(245,208,0,0.2);
+    border-radius: 6px;
+    padding: 64px 48px;
+    display: grid; grid-template-columns: 1fr auto;
+    align-items: center; gap: 40px;
+  }
+  .cta-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 4vw, 56px); line-height: 1; color: #fff;
+    margin-bottom: 12px;
+  }
+  .cta-title .accent { color: var(--yellow); }
+  .cta-sub { font-size: 15px; color: var(--muted); max-width: 480px; line-height: 1.6; }
+  .cta-btns { display: flex; flex-direction: column; gap: 12px; }
+
+  /* COMO FUNCIONA */
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2px; }
+  .step {
+    background: var(--dark); padding: 32px 24px;
+    position: relative; overflow: hidden;
+    transition: background 0.2s;
+  }
+  .step:hover { background: #161616; }
+  .step::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 2px; background: var(--yellow);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .step:hover::before { transform: scaleX(1); }
+  .step-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 56px; color: rgba(245,208,0,0.1);
+    line-height: 1; margin-bottom: 12px;
+  }
+  .step-title { font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 8px; }
+  .step-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark);
+    border-top: 1px solid rgba(245,208,0,0.1);
+    padding: 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 20px;
+  }
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px; color: var(--yellow); letter-spacing: 3px;
+  }
+  .footer-note { font-size: 12px; color: rgba(255,255,255,0.2); }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a {
+    font-size: 12px; color: rgba(255,255,255,0.3);
+    text-decoration: none; letter-spacing: 1px; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--yellow); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; } to { opacity: 1; }
+  }
+  @keyframes spin {
+    from { transform: rotate(0deg); } to { transform: rotate(360deg); }
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.06); }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 14px 20px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 100px 20px 40px; text-align: center; }
+    .hero-sub { max-width: 100%; }
+    .hero-cta { justify-content: center; }
+    .hero-right { margin-top: 40px; }
+    .stats-bar { grid-template-columns: repeat(2,1fr); }
+    .section { padding: 60px 20px; }
+    .cta-section { grid-template-columns: 1fr; margin: 0 20px 60px; padding: 40px 24px; }
+    .cta-btns { flex-direction: row; flex-wrap: wrap; }
+    footer { padding: 32px 20px; flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-logo">⚡ <span>VOLT</span></div>
+  <div class="nav-links">
+    <a href="#produtos">Produtos</a>
+    <a href="#como-funciona">Como funciona</a>
+    <a href="#contato">Contato</a>
+  </div>
+  <a href="#produtos" class="btn btn-primary">Ver Produtos</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <span class="hero-tag">⚡ Afiliado Mercado Livre</span>
+    <h1 class="hero-title">
+      Seu <span class="accent">Setup</span><br>
+      <span class="blue">Ideal</span> Aqui
+    </h1>
+    <p class="hero-sub">
+      Eletrônicos selecionados com o melhor custo-benefício.
+      Curadoria especializada, compra segura pelo Mercado Livre.
+    </p>
+    <div class="hero-cta">
+      <a href="#produtos" class="btn btn-primary">Ver todos os produtos</a>
+      <a href="#como-funciona" class="btn btn-outline">Como funciona</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-logo-wrap">
+      <div class="ring ring1"></div>
+      <div class="ring ring2"></div>
+      <div class="ring ring3"></div>
+      <div class="hero-glow"></div>
+      <div class="hero-icon">⚡</div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat">
+    <div class="stat-n">100%</div>
+    <div class="stat-l">Mercado Livre</div>
+  </div>
+  <div class="stat">
+    <div class="stat-n">Grátis</div>
+    <div class="stat-l">Entrega Full</div>
+  </div>
+  <div class="stat">
+    <div class="stat-n">Top</div>
+    <div class="stat-l">Vendedores</div>
+  </div>
+  <div class="stat">
+    <div class="stat-n">Seguro</div>
+    <div class="stat-l">Garantia ML</div>
+  </div>
+</div>
+
+<!-- PRODUTOS -->
+<section class="section" id="produtos">
+  <div class="section-header">
+    <div class="section-tag">Seleção Volt</div>
+    <h2 class="section-title">Produtos em <span class="accent">Destaque</span></h2>
+  </div>
+  <div class="products-grid">
+
+    <div class="product-card">
+      <div class="product-img">
+        🖥️
+        <span class="product-badge">Top Venda</span>
+      </div>
+      <div class="product-info">
+        <div class="product-cat">Monitores</div>
+        <div class="product-name">Monitor Gamer 144Hz</div>
+        <div class="product-desc">Full HD, 1ms, FreeSync. Perfeito para jogos competitivos.</div>
+        <div class="product-footer">
+          <div class="product-price">
+            <small>a partir de</small>
+            R$ 899
+          </div>
+          <a href="#" class="btn-buy">Comprar →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img">⌨️</div>
+      <div class="product-info">
+        <div class="product-cat">Periféricos</div>
+        <div class="product-name">Teclado Mecânico RGB</div>
+        <div class="product-desc">Switch Blue, iluminação RGB por tecla, anti-ghosting.</div>
+        <div class="product-footer">
+          <div class="product-price">
+            <small>a partir de</small>
+            R$ 349
+          </div>
+          <a href="#" class="btn-buy">Comprar →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img">
+        🖱️
+        <span class="product-badge">Oferta</span>
+      </div>
+      <div class="product-info">
+        <div class="product-cat">Periféricos</div>
+        <div class="product-name">Mouse Gamer 12000 DPI</div>
+        <div class="product-desc">Sensor óptico preciso, 7 botões programáveis, RGB.</div>
+        <div class="product-footer">
+          <div class="product-price">
+            <small>a partir de</small>
+            R$ 189
+          </div>
+          <a href="#" class="btn-buy">Comprar →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img">🎧</div>
+      <div class="product-info">
+        <div class="product-cat">Áudio</div>
+        <div class="product-name">Headset 7.1 Surround</div>
+        <div class="product-desc">Som surround virtual, microfone com cancelamento de ruído.</div>
+        <div class="product-footer">
+          <div class="product-price">
+            <small>a partir de</small>
+            R$ 279
+          </div>
+          <a href="#" class="btn-buy">Comprar →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img">💻</div>
+      <div class="product-info">
+        <div class="product-cat">Notebooks</div>
+        <div class="product-name">Notebook Gamer i5</div>
+        <div class="product-desc">16GB RAM, SSD 512GB, GPU dedicada GTX série.</div>
+        <div class="product-footer">
+          <div class="product-price">
+            <small>a partir de</small>
+            R$ 3.499
+          </div>
+          <a href="#" class="btn-buy">Comprar →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img">
+        🎮
+        <span class="product-badge">Novo</span>
+      </div>
+      <div class="product-info">
+        <div class="product-cat">Controles</div>
+        <div class="product-name">Controle Sem Fio Pro</div>
+        <div class="product-desc">Bluetooth 5.0, vibração dupla, compatível PC e console.</div>
+        <div class="product-footer">
+          <div class="product-price">
+            <small>a partir de</small>
+            R$ 159
+          </div>
+          <a href="#" class="btn-buy">Comprar →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section class="section" id="como-funciona" style="padding-top: 0;">
+  <div class="section-header">
+    <div class="section-tag">Simples assim</div>
+    <h2 class="section-title">Como <span class="accent">Funciona</span></h2>
+  </div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-title">Escolha o produto</div>
+      <div class="step-desc">Navegue pela curadoria Volt e encontre o eletrônico ideal para você.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-title">Clique em Comprar</div>
+      <div class="step-desc">Você será redirecionado direto para o produto no Mercado Livre.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-title">Compra protegida</div>
+      <div class="step-desc">Toda compra tem a proteção e garantia oficial do Mercado Livre.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-title">Receba em casa</div>
+      <div class="step-desc">Entrega rápida com rastreamento em tempo real pelo app do ML.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<div class="cta-section">
+  <div>
+    <h2 class="cta-title">Monte seu <span class="accent">Setup</span><br>dos Sonhos</h2>
+    <p class="cta-sub">Todos os produtos são de vendedores com reputação verificada no Mercado Livre. Compre com segurança e receba garantia oficial.</p>
+  </div>
+  <div class="cta-btns">
+    <a href="#produtos" class="btn btn-primary">Ver produtos</a>
+    <a href="https://wa.me/5500000000000" class="btn btn-outline" id="whatsapp-link">WhatsApp</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer id="contato">
+  <div>
+    <div class="footer-logo">⚡ VOLT</div>
+    <div class="footer-note" style="margin-top: 6px;">Site de afiliado independente • Mercado Livre Afiliados</div>
+  </div>
+  <div class="footer-links">
+    <a href="#produtos">Produtos</a>
+    <a href="#como-funciona">Como funciona</a>
+    <a href="https://wa.me/5500000000000" id="footer-whatsapp">Contato</a>
+  </div>
+</footer>
+
+</body>
+</html>
